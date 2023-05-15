@@ -31,14 +31,12 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public void deleteArticle(int bno) {
-		// TODO Auto-generated method stub
-		
+		dao.deleteArticle(bno);
 	}
 
 	@Override
 	public void updateArticle(BoardVO vo) {
-		// TODO Auto-generated method stub
-		
+		dao.updateArticle(vo);
 	}
 	
 	

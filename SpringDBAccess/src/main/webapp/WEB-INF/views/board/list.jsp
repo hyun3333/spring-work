@@ -25,7 +25,7 @@
 				</td>
 				<td>${article.writer}</td>
 				<td>
-					<a href="#">[삭제]</a>
+					<a href="<c:url value='/board/delete?boardNo=${article.boardNo}' />">[삭제]</a>
 				</td>
 			</tr>
 		</c:forEach>

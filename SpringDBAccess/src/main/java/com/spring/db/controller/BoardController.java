@@ -64,14 +64,29 @@ public class BoardController {
 	//글 수정하기 화면으로 이동 요청
 	//메서드 이름은 modify(), url: /board/modify -> GET
 	//수정하고자 하는 글 정보를 모두 받아와서 modify.jsp로 보내 주세요.(글 번호 같이)
+	@GetMapping("/modify")
+	public void modify(int boardNo, Model model) {
+		System.out.println("수정 페이지 이동 요청! 번호 : " + boardNo);
+		model.addAttribute("article", service.getArticle(boardNo));
+	}
 
 
 	//modify.jsp를 생성해서 form태그에 사용자가 처음에 작성했던 내용이 드러나도록
 	//배치해 주시고 수정을 받아 주세요.
 	//수정 처리하는 메서드: modify(), 요청 url: /modify -> POST
 	//수정 처리 완료 이후 방금 수정한 글의 상세보기 요청이 다시 들어올 수 있도록 작성하세요.
-
+	@PostMapping("/modify")
+	public String modify(BoardVO vo) {
+		System.out.println("글 수정 요청! 번호 : " + vo.getBoardNo());
+		service.updateArticle(vo);
+		return "redirect:/board/content?boardNo=" + vo.getBoardNo();
+	}
 
 	//삭제는 알아서 작성해 주세요. (삭제 클릭하면 해당 글이 삭제될 수 있도록)
+	@GetMapping("delete")
+	public String delete(int boardNo) {
+		service.deleteArticle(boardNo);
+		return "redirect:/board/list";
+	}
 
 }
