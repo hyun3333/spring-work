@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mysql.cj.log.Log;
 import com.spring.myweb.command.FreeBoardVO;
 import com.spring.myweb.freeboard.service.IFreeBoardService;
 import com.spring.myweb.util.PageCreator;
 import com.spring.myweb.util.PageVO;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/freeboard")
+@Slf4j
 public class FreeBoardController {
 
 	@Autowired
@@ -25,9 +29,9 @@ public class FreeBoardController {
 	@GetMapping("/freeList")
 	public void freeList(PageVO vo, Model model) {
 		
-		PageCreator pc = new PageCreator(vo, service.getTotal());
+		PageCreator pc = new PageCreator(vo, service.getTotal(vo));
 		
-		System.out.println(pc.toString());
+		log.info(pc.toString());
 		
 		model.addAttribute("boardList", service.getList(vo));
 		model.addAttribute("pc", pc);
@@ -56,7 +60,8 @@ public class FreeBoardController {
 	
 	//글 상세 보기 처리
 	@GetMapping("/content/{bno}")
-	public String getConString(@PathVariable int bno, Model model) {
+	public String getConString(@PathVariable int bno, @ModelAttribute("p") PageVO vo, 
+			Model model) {
 		model.addAttribute("article", service.getContent(bno));
 		return "freeboard/freeDetail";
 	}
