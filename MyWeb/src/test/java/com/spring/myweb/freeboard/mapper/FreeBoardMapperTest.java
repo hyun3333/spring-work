@@ -36,10 +36,10 @@ public class FreeBoardMapperTest {
         //given - when - then 패턴을 따릅니다. (생략 가능)
         
         //given : 테스트를 위해 주어질 데이터 (ex: parameter)
-        for(int i=1; i<=200; i++) {
+        for(int i=1; i<=10; i++) {
         	FreeBoardVO vo = new FreeBoardVO();
             vo.setTitle("반복반복" + i);
-            vo.setWriter("abc1234");
+            vo.setWriter("znvkd1234");
             vo.setContent(i + "번째 반복중~");
             //when : 테스트 실제 상황
             mapper.regist(vo);
