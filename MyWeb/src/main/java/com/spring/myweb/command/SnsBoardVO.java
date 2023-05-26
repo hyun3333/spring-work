@@ -25,7 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor @AllArgsConstructor
 public class SnsBoardVO {
 
-	private int bon;
+	private int bno;
 	private String writer;
 	private String uploadPath;
 	private String fileLoca;
