@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.spring.myweb.command.UserVO;
 import com.spring.myweb.freeboard.service.IFreeBoardService;
 import com.spring.myweb.user.service.IUserService;
+import com.spring.myweb.util.KakaoService;
 import com.spring.myweb.util.MailSenderService;
 import com.spring.myweb.util.PageCreator;
 import com.spring.myweb.util.PageVO;
@@ -32,6 +33,8 @@ public class UserController {
 	private IFreeBoardService boardService;
 	@Autowired
 	private MailSenderService mailService;
+	@Autowired
+	private KakaoService kakaoService;
 	
 	//회원가입 페이지로 이동
 	@GetMapping("/userJoin")
@@ -67,7 +70,16 @@ public class UserController {
 	
 	//로그인 페이지로 이동 요청
 	@GetMapping("/userLogin")
-	public void login() {}
+	public void login(Model model, HttpSession session) {
+		/* 카카오 URL을 만들어서 userLogin.jsp로 보내야 합니다. */
+		String kakaoAuthUrl = kakaoService.getAuthorizationUrl(session);
+		log.info("카카오 로그인 url : {}", kakaoAuthUrl);
+		model.addAttribute("urlKakao",kakaoAuthUrl);
+		
+	}
+	
+	// 카카오 로기은 성공 시 callback
+	@GetMapping("/kakao_callback")
 	
 	//로그인 요청
 	@PostMapping("/userLogin")
