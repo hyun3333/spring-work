@@ -102,7 +102,7 @@ public class KakaoService {
 	/* Access Token을 이용하여 카카오 사용자 프로필 API 요청 */
 	public KakaoUserVO getUserProfile(String accessToken) {
 
-		String requestUri = "https://kapi.kakao.com/v2/user/me";
+String requestUri = "https://kapi.kakao.com/v2/user/me";
 		
 		//요청 헤더 설정
 		HttpHeaders headers = new HttpHeaders();

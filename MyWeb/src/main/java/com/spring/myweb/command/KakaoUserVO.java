@@ -34,7 +34,6 @@ public class KakaoUserVO {
 		@JsonProperty("email")
 		private String email;
 		
-		@JsonProperty("kakao_account")
 		private Profile profile;
 		
 		@Getter @Setter @ToString
